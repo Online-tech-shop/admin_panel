@@ -18,7 +18,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (BuildContext context) => ManageProductScreen(
           product: data['product'] as Product,
           productReviews: data['product-reviews'] as List<Review>,
-          isEditProduct: data['is-edit-product'] as bool,
+          onProductEdited: data['on-product-edited'] as Function(),
         ),
       );
     default:

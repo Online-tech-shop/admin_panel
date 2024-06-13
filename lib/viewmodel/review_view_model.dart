@@ -12,4 +12,12 @@ class ReviewViewModel {
       rethrow;
     }
   }
+
+  Future<void> deleteReview({required String id}) async {
+    try {
+      await _reviewHttpService.deleteReview(id: id);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

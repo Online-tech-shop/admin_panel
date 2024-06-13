@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 
@@ -20,6 +21,9 @@ class ReviewHttpService {
             loadedReviews.add(Review.fromJson(value));
           },
         );
+        loadedReviews.forEach(
+          (element) => print(element.productId),
+        );
         return loadedReviews;
       }
       throw 'error: ReviewHttpService().loadedReviews()';
@@ -34,14 +38,26 @@ class ReviewHttpService {
       _url,
       body: jsonEncode(
         {
-          'product-id': '-O-BHB-5Slg_-Y1q0JcX',
+          'product-id': '-O-G4GOJlEIzslimewcY',
           'user-name': 'gishmat',
-          'text': 'awesome',
+          'text': 'text',
           'star': 2,
-          'published-date-time': '3245t6789',
+          'published-date-time': 'yesterday',
         },
       ),
     );
-    print(response.body);
+  }
+
+  Future<void> deleteReview({required String id}) async {
+    try {
+      await http.delete(
+        Uri.parse(
+          'https://to-do-f5021-default-rtdb.firebaseio.com/review/$id.json',
+        ),
+      );
+    } catch (e) {
+      debugPrint('error: ReviewHttpService().deleteReview(): $e');
+      rethrow;
+    }
   }
 }

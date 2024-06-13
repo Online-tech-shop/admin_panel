@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:uzum_market_admin_panel/service/http/product_http_service.dart';
+import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
 import 'package:uzum_market_admin_panel/views/screen/add_product_screen.dart';
 import 'package:uzum_market_admin_panel/views/screen/all_products_screen.dart';
 
@@ -22,16 +23,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    ProductHttpService().addProduct(
-      name: 'name',
-      price: 100,
-      category: 0,
-      images: ['https://images.uzum.uz/cbuusacff5b729kv6udg/original.jpg'],
-      seller: 'seller',
-      aboutProduct: 'aboutProduct',
-      saleType: [0],
-      brieflyAboutProduct: ['brieflyAboutProduct'],
-    );
+    ReviewHttpService().addReview();
+    // ProductHttpService().addProduct(
+    //   name: 'name',
+    //   price: 100,
+    //   category: 0,
+    //   images: ['https://images.uzum.uz/cbuusacff5b729kv6udg/original.jpg'],
+    //   seller: 'seller',
+    //   aboutProduct: 'aboutProduct',
+    //   saleType: [0],
+    //   brieflyAboutProduct: ['brieflyAboutProduct'],
+    // );
   }
 
   @override

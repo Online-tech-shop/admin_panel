@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uzum_market_admin_panel/models/product_model.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
+import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
 import 'package:uzum_market_admin_panel/utils/extension/sized_box_extension.dart';
 import 'package:uzum_market_admin_panel/viewmodel/product_view_model.dart';
 import 'package:uzum_market_admin_panel/views/widgets/custom_text_form_field.dart';
+import 'package:uzum_market_admin_panel/views/widgets/user_reviews_container.dart';
 
 class ManageProductScreen extends StatefulWidget {
   final Product product;
   final List<Review> productReviews;
-  final bool isEditProduct;
+  final Function() onProductEdited;
 
   const ManageProductScreen({
     super.key,
     required this.product,
     required this.productReviews,
-    required this.isEditProduct,
+    required this.onProductEdited,
   });
 
   @override
@@ -26,6 +28,8 @@ class ManageProductScreen extends StatefulWidget {
 class _ManageProductScreenState extends State<ManageProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ProductViewModel _productViewModel = ProductViewModel();
+  final ReviewHttpService _reviewHttpService = ReviewHttpService();
+
   String newName = '', newSeller = '', newAboutProduct = '';
   int newPrice = 0, newCategory = 0;
 
@@ -96,6 +100,13 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
     }
   }
 
+  void onReviewDeleted(String id) async {
+    widget.productReviews.removeAt(
+      widget.productReviews.indexWhere((element) => element.reviewId == id),
+    );
+    _reviewHttpService.deleteReview(id: id).then((_) => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,26 +148,17 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                       onPressed: () async {
                         await _productViewModel
                             .deleteProduct(widget.product.id);
-                        Navigator.of(context).pop();
-                        if (mounted) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text(
-                                'Mahuslot ma\'lumotlar bazasidan muvaffaqiyatli o\'chirildi!',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('OK'),
-                                )
-                              ],
+                        if (mounted) Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Mahsulot ma\'lumotlar bazasidan muvaffaqiyatli o\'chirildi!',
+                              style: TextStyle(fontSize: 12.sp),
                             ),
-                          );
-                        }
+                            duration: const Duration(seconds: 3),
+                          ),
+                        );
+                        if (mounted) Navigator.of(context).pop();
                       },
                       style: const ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.red),
@@ -413,6 +415,32 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
               ],
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(left: 20.0, bottom: 5.h),
+            child: Row(
+              children: [
+                Text(
+                  widget.productReviews.isNotEmpty
+                      ? "Mahsulot sharhlari"
+                      : "Ushbu mahsulotga hali sharh qoldirilmagan",
+                ),
+              ],
+            ),
+          ),
+          if (widget.productReviews.isNotEmpty)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (int i = 0; i < widget.productReviews.length; i++)
+                    UserReviewsContainer(
+                      review: widget.productReviews[i],
+                      index: i,
+                      onReviewDeleted: onReviewDeleted,
+                    ),
+                ],
+              ),
+            ),
           GestureDetector(
             onTap: () {
               if (_formKey.currentState!.validate()) {

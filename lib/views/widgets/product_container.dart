@@ -8,21 +8,24 @@ import 'package:uzum_market_admin_panel/utils/routes.dart';
 class ProductContainer extends StatelessWidget {
   final Product product;
   final List<Review> reviews;
+  final Function() onProductEdited;
 
   const ProductContainer({
     super.key,
     required this.product,
     required this.reviews,
+    required this.onProductEdited,
   });
+
   @override
   Widget build(BuildContext context) {
-    List<Review> productReviews = product.getReviews(reviews);
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, RouteName.product, arguments: {
           'product': product,
-          'product-reviews': productReviews,
+          'product-reviews': reviews,
           'is-edit-product': true,
+          'on-product-edited': onProductEdited,
         });
       },
       child: Column(
@@ -72,7 +75,7 @@ class ProductContainer extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          Text('${productReviews.length} sharhlar'),
+          Text('${reviews.length} sharhlar'),
         ],
       ),
     );
