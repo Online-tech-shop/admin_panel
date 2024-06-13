@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:uzum_market_admin_panel/service/http/product_http_service.dart';
-import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
 import 'package:uzum_market_admin_panel/views/screen/add_product_screen.dart';
 import 'package:uzum_market_admin_panel/views/screen/all_products_screen.dart';
 

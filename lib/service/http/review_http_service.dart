@@ -37,7 +37,7 @@ class ReviewHttpService {
   }
 
   Future<void> addReview() async {
-    final response = await http.post(
+    await http.post(
       _url,
       body: jsonEncode(
         {

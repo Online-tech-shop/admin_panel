@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
-import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
 
 class UserReviewsContainer extends StatefulWidget {
   final Review review;
