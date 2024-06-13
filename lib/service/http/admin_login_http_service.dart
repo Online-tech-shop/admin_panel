@@ -79,7 +79,8 @@ class AdminLoginHttpService {
           },
         ),
       );
-      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      final Map<String, dynamic> data =
+          jsonDecode(response.body) as Map<String, dynamic>;
       if (response.statusCode != 200) {
         throw Exception(data['error']['message']);
       }
