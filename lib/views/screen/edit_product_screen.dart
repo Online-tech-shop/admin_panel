@@ -1,10 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uzum_market_admin_panel/models/product_model.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
 import 'package:uzum_market_admin_panel/utils/extension/sized_box_extension.dart';
+import 'package:uzum_market_admin_panel/utils/functions.dart';
 import 'package:uzum_market_admin_panel/viewmodel/product_view_model.dart';
 import 'package:uzum_market_admin_panel/views/widgets/custom_text_form_field.dart';
 import 'package:uzum_market_admin_panel/views/widgets/user_reviews_container.dart';
@@ -47,20 +47,6 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
         List<String>.from(widget.product.brieflyAboutProduct);
   }
 
-  String? validator(String? value, String validatorText) {
-    if (value == null || value.trim().isEmpty) {
-      return 'Mahsulot ${validatorText}ni kiriting.';
-    }
-    return null;
-  }
-
-  String? intValidator(String? p0, String validatorText) {
-    if (p0 == null || p0.trim().isEmpty || !(int.tryParse(p0) != null)) {
-      return validatorText;
-    }
-    return null;
-  }
-
   void deleteImage(int index) {
     canDeleteImage = true;
     if (newImages.length > 1) {
@@ -91,20 +77,17 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
     setState(() {});
   }
 
-  List<int>? checkList(String str) {
-    try {
-      var decoded = jsonDecode(str);
-      return List<int>.from(decoded);
-    } catch (e) {
-      return null;
-    }
-  }
-
-  void onReviewDeleted(String id) async {
+  void onReviewDeleted(String id) {
     widget.productReviews.removeAt(
       widget.productReviews.indexWhere((element) => element.reviewId == id),
     );
     _reviewHttpService.deleteReview(id: id).then((_) => setState(() {}));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content:
+            Text('Sharh ma\'lumotlar bazasidan muvaffaqiyatli o\'chirildi!'),
+      ),
+    );
   }
 
   @override
@@ -114,7 +97,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
         title: const Text('Mahsulotni tahrirlash'),
         leading: GestureDetector(
           onTap: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context, widget.productReviews);
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -148,17 +131,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                       onPressed: () async {
                         await _productViewModel
                             .deleteProduct(widget.product.id);
-                        if (mounted) Navigator.of(context).pop();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Mahsulot ma\'lumotlar bazasidan muvaffaqiyatli o\'chirildi!',
-                              style: TextStyle(fontSize: 12.sp),
-                            ),
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
-                        if (mounted) Navigator.of(context).pop();
+                        widget.onProductEdited();
                       },
                       style: const ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.red),
@@ -408,45 +381,57 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                           newAboutProduct = p0 ?? '';
                         },
                       ),
-                      20.height(),
+                      10.height(),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20.0, bottom: 5.h),
-            child: Row(
-              children: [
-                Text(
-                  widget.productReviews.isNotEmpty
-                      ? "Mahsulot sharhlari"
-                      : "Ushbu mahsulotga hali sharh qoldirilmagan",
+                SizedBox(
+                  height: 30.h,
+                  child: const Divider(),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0, bottom: 5.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Mahsulot sharhlari',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                      Text(
+                        widget.productReviews.isNotEmpty
+                            ? "Mahsulot sharhlari"
+                            : "Ushbu mahsulotga hali sharh qoldirilmagan",
+                      ),
+                    ],
+                  ),
+                ),
+                if (widget.productReviews.isNotEmpty)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (int i = 0; i < widget.productReviews.length; i++)
+                          UserReviewsContainer(
+                            review: widget.productReviews[i],
+                            index: i,
+                            onReviewDeleted: onReviewDeleted,
+                          ),
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
-          if (widget.productReviews.isNotEmpty)
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  for (int i = 0; i < widget.productReviews.length; i++)
-                    UserReviewsContainer(
-                      review: widget.productReviews[i],
-                      index: i,
-                      onReviewDeleted: onReviewDeleted,
-                    ),
-                ],
-              ),
-            ),
           GestureDetector(
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
 
-                // / editing product
                 _productViewModel.editProduct(
                   id: widget.product.id,
                   name: newName,

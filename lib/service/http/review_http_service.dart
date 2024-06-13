@@ -6,24 +6,27 @@ import 'package:uzum_market_admin_panel/models/review_model.dart';
 
 class ReviewHttpService {
   final Uri _url = Uri.parse(
-    'https://to-do-f5021-default-rtdb.firebaseio.com/review.json',
+    'https://uzum-market-81608-default-rtdb.firebaseio.com/review.json',
   );
 
   Future<List<Review>> getReviews() async {
     try {
-      final response = await http.get(_url);
+      final http.Response response = await http.get(_url);
       if (response.statusCode == 200) {
+        if (response.body == 'null') {
+          return [];
+        }
         final Map<String, dynamic> data = jsonDecode(response.body);
+
         List<Review> loadedReviews = [];
+
         data.forEach(
           (String key, dynamic value) {
             value['review-id'] = key;
             loadedReviews.add(Review.fromJson(value));
           },
         );
-        loadedReviews.forEach(
-          (element) => print(element.productId),
-        );
+
         return loadedReviews;
       }
       throw 'error: ReviewHttpService().loadedReviews()';
@@ -38,7 +41,7 @@ class ReviewHttpService {
       _url,
       body: jsonEncode(
         {
-          'product-id': '-O-G4GOJlEIzslimewcY',
+          'product-id': '-O-Giauk95IpCfDxK4aL',
           'user-name': 'gishmat',
           'text': 'text',
           'star': 2,
@@ -52,7 +55,7 @@ class ReviewHttpService {
     try {
       await http.delete(
         Uri.parse(
-          'https://to-do-f5021-default-rtdb.firebaseio.com/review/$id.json',
+          'https://uzum-market-81608-default-rtdb.firebaseio.com/review/$id.json',
         ),
       );
     } catch (e) {

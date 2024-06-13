@@ -5,12 +5,12 @@ import 'package:uzum_market_admin_panel/models/review_model.dart';
 import 'package:uzum_market_admin_panel/utils/extension/sized_box_extension.dart';
 import 'package:uzum_market_admin_panel/utils/routes.dart';
 
-class ProductContainer extends StatelessWidget {
+class ProductContainer extends StatefulWidget {
   final Product product;
-  final List<Review> reviews;
+  List<Review> reviews;
   final Function() onProductEdited;
 
-  const ProductContainer({
+  ProductContainer({
     super.key,
     required this.product,
     required this.reviews,
@@ -18,21 +18,32 @@ class ProductContainer extends StatelessWidget {
   });
 
   @override
+  State<ProductContainer> createState() => _ProductContainerState();
+}
+
+class _ProductContainerState extends State<ProductContainer> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, RouteName.product, arguments: {
-          'product': product,
-          'product-reviews': reviews,
+      onTap: () async {
+        final List<Review>? data =
+            await Navigator.pushNamed(context, RouteName.product, arguments: {
+          'product': widget.product,
+          'product-reviews': widget.reviews,
           'is-edit-product': true,
-          'on-product-edited': onProductEdited,
+          'on-product-edited': widget.onProductEdited,
         });
+
+        if (data != null) {
+          widget.reviews = data;
+          setState(() {});
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
-            product.images[0],
+            widget.product.images[0],
             width: 150.w,
             height: 200.h,
             fit: BoxFit.cover,
@@ -58,7 +69,7 @@ class ProductContainer extends StatelessWidget {
           ),
           8.height(),
           Text(
-            product.name,
+            widget.product.name,
             style: TextStyle(
               color: Colors.black,
               fontSize: 16.sp,
@@ -67,7 +78,7 @@ class ProductContainer extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           Text(
-            '${product.price} so\'m',
+            '${widget.product.price} so\'m',
             style: TextStyle(
               color: Colors.black,
               fontSize: 16.sp,
@@ -75,7 +86,7 @@ class ProductContainer extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          Text('${reviews.length} sharhlar'),
+          Text('${widget.reviews.length} sharhlar'),
         ],
       ),
     );

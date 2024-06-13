@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:uzum_market_admin_panel/service/http/product_http_service.dart';
 import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
@@ -21,28 +22,28 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   @override
-  void initState() {
-    super.initState();
-    ReviewHttpService().addReview();
-    // ProductHttpService().addProduct(
-    //   name: 'name',
-    //   price: 100,
-    //   category: 0,
-    //   images: ['https://images.uzum.uz/cbuusacff5b729kv6udg/original.jpg'],
-    //   seller: 'seller',
-    //   aboutProduct: 'aboutProduct',
-    //   saleType: [0],
-    //   brieflyAboutProduct: ['brieflyAboutProduct'],
-    // );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Admin panel',
         ),
+        leading: Padding(
+          padding: EdgeInsets.all(5.0.sp),
+          child: Image.asset('assets/images/uzum_logo.jpeg'),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 10.0.w),
+            child: GestureDetector(
+              onTap: () => Navigator.pushReplacementNamed(context, '/'),
+              child: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(

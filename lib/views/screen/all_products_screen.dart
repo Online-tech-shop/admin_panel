@@ -18,16 +18,25 @@ class _ProductsScreenState extends State<ProductsScreen> {
   final ReviewViewModel _reviewViewModel = ReviewViewModel();
   List<Review> _reviews = [];
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   Future<void> getReviews() async {
     _reviews = await _reviewViewModel.getReviews();
   }
 
-  void onProductEdited() => setState(() {});
+  void onProductEdited() {
+    Navigator.of(context).pop();
+    setState(() {});
+
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Mahsulot ma\'lumotlar bazasidan muvaffaqiyatli o\'chirildi!',
+          style: TextStyle(fontSize: 12.sp),
+        ),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
