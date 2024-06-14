@@ -30,9 +30,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
   final ProductViewModel _productViewModel = ProductViewModel();
   final ReviewHttpService _reviewHttpService = ReviewHttpService();
 
-  String newName = '', newSeller = '', newAboutProduct = '';
-  int newPrice = 0, newCategory = 0;
-
+  String newSeller = '', newAboutProduct = '';
+  int newPrice = 0, newCategory = 0, newLeftAmount = 0;
+  List<String> newName = ['', ''];
   List<int> newSaleType = [];
   late List<String> newImages;
   late List<String> newBrieflyAboutProduct;
@@ -119,9 +119,6 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.green),
-                      ),
                       child: const Text(
                         'Yo\'q',
                         style: TextStyle(color: Colors.white),
@@ -133,9 +130,6 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                             .deleteProduct(widget.product.id);
                         widget.onProductEdited();
                       },
-                      style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.red),
-                      ),
                       child: const Text(
                         'Ha',
                         style: TextStyle(color: Colors.white),
@@ -165,13 +159,32 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                     children: [
                       /// text field for product name
                       CustomTextFormField(
-                        initialValue: widget.product.name,
-                        labelText: 'Mahsulot nomi',
+                        initialValue: widget.product.name.isNotEmpty
+                            ? widget.product.name[0]
+                            : '',
+                        labelText: 'Mahsulot nomi (uz)',
                         validator: (String? p0) {
                           return validator(p0, 'nomi');
                         },
                         onSaved: (String? p0) {
-                          newName = p0 ?? '';
+                          if (newName.isNotEmpty) {
+                            newName[0] = p0 ?? '';
+                          }
+                        },
+                      ),
+                      15.height(),
+                      CustomTextFormField(
+                        initialValue: widget.product.name.length > 1
+                            ? widget.product.name[1]
+                            : '',
+                        labelText: 'Mahsulot nomi (ru)',
+                        validator: (String? p0) {
+                          return validator(p0, 'nomi');
+                        },
+                        onSaved: (String? p0) {
+                          if (newName.length > 1) {
+                            newName[1] = p0 ?? '';
+                          }
                         },
                       ),
                       15.height(),
@@ -242,7 +255,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                                 return validator(p0, 'rasmi');
                               },
                               onSaved: (String? newValue) {
-                                newImages[i] = newValue ?? '';
+                                if (i < newImages.length) {
+                                  newImages[i] = newValue ?? '';
+                                }
                               },
                             ),
                           ],
@@ -360,7 +375,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                                 return null;
                               },
                               onSaved: (String? newValue) {
-                                newBrieflyAboutProduct[i] = newValue ?? '';
+                                if (i < newBrieflyAboutProduct.length) {
+                                  newBrieflyAboutProduct[i] = newValue ?? '';
+                                }
                               },
                             ),
                           ],
@@ -379,6 +396,19 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                         },
                         onSaved: (String? p0) {
                           newAboutProduct = p0 ?? '';
+                        },
+                      ),
+                      15.height(),
+                      CustomTextFormField(
+                        initialValue: widget.product.leftProduct.toString(),
+                        labelText: 'Mahsulot ombordagi soni',
+                        validator: (String? p0) {
+                          return intValidator(p0, 'ombordagi soni');
+                        },
+                        onSaved: (String? p0) {
+                          if (p0 != null) {
+                            newLeftAmount = int.parse(p0);
+                          }
                         },
                       ),
                       10.height(),
@@ -431,7 +461,6 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-
                 _productViewModel.editProduct(
                   id: widget.product.id,
                   name: newName,
@@ -444,8 +473,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                   aboutProduct: newAboutProduct,
                   saleType: newSaleType,
                   brieflyAboutProduct: newBrieflyAboutProduct,
+                  leftProduct: newLeftAmount,
                 );
-                debugPrint('object');
+
                 showDialog(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(

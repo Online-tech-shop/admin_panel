@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:uzum_market_admin_panel/models/product_model.dart';
 
 class ProductHttpService {
-  final Uri _url = Uri.parse(
-      'https://uzum-market-81608-default-rtdb.firebaseio.com/product.json');
+  final Uri _url =
+      Uri.parse('https://to-do-f5021-default-rtdb.firebaseio.com/product.json');
 
   Future<List<Product>> getProducts() async {
     try {
@@ -23,9 +23,6 @@ class ProductHttpService {
             loadedProducts.add(Product.fromJson(value));
           },
         );
-        for(var each in loadedProducts){
-          print(each.id + ' bu id');
-        }
         return loadedProducts;
       }
       throw Exception('error: ProductHttpService().getProduct()');
@@ -36,7 +33,7 @@ class ProductHttpService {
   }
 
   Future<Product> addProduct({
-    required String name,
+    required List<String> name,
     required int price,
     required int category,
     required List<String> images,
@@ -44,6 +41,7 @@ class ProductHttpService {
     required String aboutProduct,
     required List<int> saleType,
     required List<String> brieflyAboutProduct,
+    required int leftProduct,
   }) async {
     try {
       Map<String, dynamic> productData = {
@@ -57,6 +55,7 @@ class ProductHttpService {
         'about-product': aboutProduct,
         'sale-type': saleType,
         'briefly-about-product': brieflyAboutProduct,
+        'left-product': leftProduct,
       };
       final http.Response response = await http.post(
         _url,
@@ -72,7 +71,7 @@ class ProductHttpService {
 
   Future<void> editProduct({
     required String id,
-    required String name,
+    required List<String> name,
     required int price,
     required int category,
     required List<String> images,
@@ -82,6 +81,7 @@ class ProductHttpService {
     required String aboutProduct,
     required List<int> saleType,
     required List<String> brieflyAboutProduct,
+    required int leftProduct,
   }) async {
     try {
       Map<String, dynamic> updatedData = {
@@ -95,10 +95,10 @@ class ProductHttpService {
         'about-product': aboutProduct,
         'sale-type': saleType,
         'briefly-about-product': brieflyAboutProduct,
+        'left-product': leftProduct,
       };
-
       final Uri editUrl = Uri.parse(
-          'https://uzum-market-81608-default-rtdb.firebaseio.com/product/$id.json');
+          'https://to-do-f5021-default-rtdb.firebaseio.com/product/$id.json');
       final http.Response response = await http.patch(
         editUrl,
         body: jsonEncode(updatedData),
@@ -116,7 +116,7 @@ class ProductHttpService {
   Future<void> deleteProduct({required String id}) async {
     try {
       final Uri deleteUrl = Uri.parse(
-        'https://uzum-market-81608-default-rtdb.firebaseio.com/product/$id.json',
+        'https://to-do-f5021-default-rtdb.firebaseio.com/product/$id.json',
       );
       final response = await http.delete(deleteUrl);
       debugPrint(response.body);

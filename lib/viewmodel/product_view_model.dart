@@ -15,7 +15,7 @@ class ProductViewModel {
   }
 
   Future<void> addNewProduct({
-    required String name,
+    required List<String> name,
     required int price,
     required int category,
     required List<String> images,
@@ -23,6 +23,7 @@ class ProductViewModel {
     required String aboutProduct,
     required List<int> saleType,
     required List<String> brieflyAboutProduct,
+    required int leftProduct,
   }) async {
     try {
       _productHttpService.addProduct(
@@ -32,6 +33,7 @@ class ProductViewModel {
         images: images,
         seller: seller,
         aboutProduct: aboutProduct,
+        leftProduct: leftProduct,
         saleType: saleType,
         brieflyAboutProduct: brieflyAboutProduct,
       );
@@ -43,7 +45,7 @@ class ProductViewModel {
 
   Future<void> editProduct({
     required String id,
-    required String name,
+    required List<String> name,
     required int price,
     required int category,
     required List<String> images,
@@ -53,6 +55,7 @@ class ProductViewModel {
     required String aboutProduct,
     required List<int> saleType,
     required List<String> brieflyAboutProduct,
+    required int leftProduct,
   }) async {
     try {
       await _productHttpService.editProduct(
@@ -67,6 +70,7 @@ class ProductViewModel {
         aboutProduct: aboutProduct,
         saleType: saleType,
         brieflyAboutProduct: brieflyAboutProduct,
+          leftProduct:leftProduct,
       );
     } catch (e) {
       debugPrint('error: ProductViewModel().editProduct(): $e');

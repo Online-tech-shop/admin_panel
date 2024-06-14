@@ -31,8 +31,6 @@ class _SuperAdminSignUpState extends State<SuperAdminSignUp> {
     });
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      print(email);
-      print(password);
       await _authViewmodel
           .registerNewAdmin(email: email, password: password)
           .then((value) {
@@ -111,7 +109,7 @@ class _SuperAdminSignUpState extends State<SuperAdminSignUp> {
                       if (value == null ||
                           value.trim().isEmpty ||
                           !RegExp(
-                            "^[a-zA-Z0-9.!#\$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\$",
+                            "^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*\$",
                           ).hasMatch(value)) {
                         return 'Yaroqli elektron pochta manzilini kiriting';
                       }

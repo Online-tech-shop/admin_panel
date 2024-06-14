@@ -15,14 +15,15 @@ class AddProductScreen extends StatefulWidget {
 class _AddProductScreenState extends State<AddProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ProductViewModel _productViewModel = ProductViewModel();
-  String newName = '', newSeller = '', newAboutProduct = '';
+  String newSeller = '', newAboutProduct = '';
   int newPrice = 0, newCategory = 0;
-
+  List<String> newName = ['', ''];
   List<int> newSaleType = [];
   List<String> newImages = [''];
   List<String> newBrieflyAboutProduct = [''];
   bool canDeleteImage = true;
   bool canDeleteDescription = true;
+  int leftProduct = 0;
 
   @override
   void initState() {
@@ -95,20 +96,35 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    /// text field for product name
+                    // Product name fields
                     CustomTextFormField(
                       initialValue: '',
-                      labelText: 'Mahsulot nomi',
+                      labelText: 'Mahsulot nomi(uz)',
                       validator: (String? p0) {
                         return validator(p0, 'nomi');
                       },
                       onSaved: (String? p0) {
-                        newName = p0 ?? '';
+                        if (newName.isNotEmpty) {
+                          newName[0] = p0 ?? '';
+                        }
+                      },
+                    ),
+                    15.height(),
+                    CustomTextFormField(
+                      initialValue: '',
+                      labelText: 'Mahsulot nomi(ru)',
+                      validator: (String? p0) {
+                        return validator(p0, 'nomi');
+                      },
+                      onSaved: (String? p0) {
+                        if (newName.length > 1) {
+                          newName[1] = p0 ?? '';
+                        }
                       },
                     ),
                     15.height(),
 
-                    /// text field for product price
+                    // Product price field
                     CustomTextFormField(
                       initialValue: '',
                       labelText: 'Mahsulot narxi',
@@ -127,7 +143,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: const Divider(),
                     ),
 
-                    /// text field for product images
+                    // Product images fields
                     for (int i = 0; i < newImages.length; i++)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +189,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               return validator(p0, 'rasmi');
                             },
                             onSaved: (String? newValue) {
-                              newImages[i] = newValue ?? '';
+                              if (i < newImages.length) {
+                                newImages[i] = newValue ?? '';
+                              }
                             },
                           ),
                         ],
@@ -183,7 +201,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: const Divider(),
                     ),
 
-                    /// text field for product category
+                    // Product category field
                     CustomTextFormField(
                       initialValue: '',
                       labelText: 'Mahsulot kategoriyasi',
@@ -199,7 +217,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     15.height(),
 
-                    /// text field for product seller
+                    // Product seller field
                     CustomTextFormField(
                       initialValue: '',
                       labelText: 'Mahsulot sotuvchisi',
@@ -212,7 +230,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     15.height(),
 
-                    /// text field for product sale type
+                    // Product sale type field
                     CustomTextFormField(
                       initialValue: '',
                       labelText:
@@ -237,7 +255,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: const Divider(),
                     ),
 
-                    /// text field for product description
+                    // Product description fields
                     for (int i = 0; i < newBrieflyAboutProduct.length; i++)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -288,7 +306,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               return null;
                             },
                             onSaved: (String? newValue) {
-                              newBrieflyAboutProduct[i] = newValue ?? '';
+                              if (i < newBrieflyAboutProduct.length) {
+                                newBrieflyAboutProduct[i] = newValue ?? '';
+                              }
                             },
                           ),
                         ],
@@ -298,7 +318,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: const Divider(),
                     ),
 
-                    /// text field for product about
+                    // Product about field
                     CustomTextFormField(
                       initialValue: '',
                       labelText: 'Mahsulot haqida',
@@ -307,6 +327,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       },
                       onSaved: (String? p0) {
                         newAboutProduct = p0 ?? '';
+                      },
+                    ),
+                    20.height(),
+                    CustomTextFormField(
+                      initialValue: '',
+                      labelText: 'Mahsulot ombordagi soni',
+                      validator: (String? p0) {
+                        return intValidator(p0, 'ombordagi soni');
+                      },
+                      onSaved: (String? p0) {
+                        if (p0 != null) {
+                          leftProduct = int.parse(p0);
+                        }else{
+                          leftProduct = 0;
+                        }
                       },
                     ),
                     20.height(),
@@ -320,13 +355,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
           onTap: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-
               _productViewModel.addNewProduct(
                 name: newName,
                 price: newPrice,
                 category: newCategory,
                 images: newImages,
                 seller: newSeller,
+                leftProduct: leftProduct,
                 aboutProduct: newAboutProduct,
                 saleType: newSaleType,
                 brieflyAboutProduct: newBrieflyAboutProduct,

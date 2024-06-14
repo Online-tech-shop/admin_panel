@@ -8,7 +8,6 @@ class ReviewViewModel {
     try {
       return await _reviewHttpService.getReviews();
     } catch (e) {
-      print('error: ReviewViewModel().getReviews(): $e');
       rethrow;
     }
   }

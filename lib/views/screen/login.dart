@@ -31,8 +31,6 @@ class _LoginState extends State<Login> {
       setState(() {});
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        print(_email);
-        print(_password);
         try {
           await _adminLoginViewModel
               .loginAdmin(email: _email, password: _password)

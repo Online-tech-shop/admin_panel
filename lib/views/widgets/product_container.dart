@@ -69,7 +69,7 @@ class _ProductContainerState extends State<ProductContainer> {
           ),
           8.height(),
           Text(
-            widget.product.name,
+            widget.product.name[0],
             style: TextStyle(
               color: Colors.black,
               fontSize: 16.sp,
