@@ -3,6 +3,7 @@ import 'package:uzum_market_admin_panel/models/product_model.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 import 'package:uzum_market_admin_panel/views/screen/edit_product_screen.dart';
 import 'package:uzum_market_admin_panel/views/screen/home_screen.dart';
+import 'package:uzum_market_admin_panel/views/screen/login.dart';
 import 'package:uzum_market_admin_panel/views/screen/super_admin_sign_up.dart';
 
 class RouteName {
@@ -25,7 +26,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case RouteName.home:
       return CupertinoPageRoute(
-        builder: (BuildContext context) => const HomeScreen(),
+        builder: (BuildContext context) => const Login(),
       );
     case RouteName.superAdmin:
       return CupertinoPageRoute(
