@@ -119,9 +119,15 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
+                      style: const ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.green)
+                      ),
                       child: const Text(
                         'Yo\'q',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.white,
+                          backgroundColor: Colors.green,
+                        ),
                       ),
                     ),
                     TextButton(
@@ -130,9 +136,15 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                             .deleteProduct(widget.product.id);
                         widget.onProductEdited();
                       },
+                      style: const ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.red)
+                      ),
                       child: const Text(
                         'Ha',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.white,
+                          backgroundColor: Colors.red,
+                        ),
                       ),
                     ),
                   ],
