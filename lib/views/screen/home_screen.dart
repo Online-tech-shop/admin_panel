@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
+import 'package:uzum_market_admin_panel/service/http/user_http_service.dart';
 import 'package:uzum_market_admin_panel/views/screen/add_product_screen.dart';
 import 'package:uzum_market_admin_panel/views/screen/all_products_screen.dart';
+import 'package:uzum_market_admin_panel/views/screen/manage_user_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,19 +14,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Widget> _pages = const [
+  final List<Widget> _pages =  [
     ProductsScreen(),
     AddProductScreen(),
+    ManageUserScreen(),
   ];
 
   int _currentIndex = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     ReviewHttpService().addReview();
-
+    // UserHttpService().addUser();
   }
 
   @override
@@ -36,12 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
           'Admin panel',
         ),
         leading: Padding(
-          padding: EdgeInsets.all(5.0.sp),
+          padding: const EdgeInsets.all(5.0),
           child: Image.asset('assets/images/uzum_logo.jpeg'),
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 10.0.w),
+            padding: const EdgeInsets.only(right: 10.0),
             child: GestureDetector(
               onTap: () => Navigator.pushReplacementNamed(context, '/'),
               child: const Icon(
@@ -64,6 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.add),
             title: const Text('Mahsulot qo\'shish'),
             selectedColor: const Color(0xFF6F00FF),
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(Icons.person),
+            title: const Text('Foydalanuvchilarni boshqarish'),
+            selectedColor: Colors.deepOrangeAccent,
           ),
         ],
         currentIndex: _currentIndex,

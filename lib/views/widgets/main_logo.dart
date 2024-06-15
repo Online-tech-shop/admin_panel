@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainLogo extends StatelessWidget {
   const MainLogo({super.key});
@@ -7,8 +6,8 @@ class MainLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.h,
-      width: 100.w,
+      height: 100,
+      width: 100,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(

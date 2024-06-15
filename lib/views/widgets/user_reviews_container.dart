@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 
 class UserReviewsContainer extends StatefulWidget {
@@ -25,9 +24,9 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: widget.index == 0 ? 10.w : 0.w,
-        right: 10.w,
-        bottom: 5.h,
+        left: widget.index == 0 ? 10 : 0,
+        right: 10,
+        bottom: 5,
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
@@ -56,7 +55,7 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
                       builder: (BuildContext context) => AlertDialog(
                         title: Text(
                           'Siz haqiqatdan ham ${widget.review.userName} tomonidan qoldirilgan sharhni ma\'lumotlar bazasidan o\'chirmoqchimisiz?',
-                          style: TextStyle(fontSize: 18.sp),
+                          style: const TextStyle(fontSize: 18),
                         ),
                         actions: [
                           TextButton(
@@ -93,14 +92,14 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
                 ),
               ],
             ),
-            SizedBox(height: 5.h),
+            const SizedBox(height: 5),
             Text(
               widget.review.text,
               style: Theme.of(context).textTheme.bodyLarge,
               maxLines: null,
               overflow: TextOverflow.visible,
             ),
-            SizedBox(height: 5.h),
+            const SizedBox(height: 5),
             Row(
               children: List.generate(
                 5,

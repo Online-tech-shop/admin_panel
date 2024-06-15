@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uzum_market_admin_panel/models/product_model.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 import 'package:uzum_market_admin_panel/utils/extension/sized_box_extension.dart';
@@ -44,8 +43,8 @@ class _ProductContainerState extends State<ProductContainer> {
         children: [
           Image.network(
             widget.product.images[0],
-            width: 150.w,
-            height: 200.h,
+            width: 150,
+            height: 200,
             fit: BoxFit.cover,
             loadingBuilder: (BuildContext context, Widget child,
                 ImageChunkEvent? loadingProgress) {
@@ -53,8 +52,8 @@ class _ProductContainerState extends State<ProductContainer> {
                 return child;
               } else {
                 return SizedBox(
-                  width: 150.w,
-                  height: 200.h,
+                  width: 150,
+                  height: 200,
                   child: Center(
                     child: CircularProgressIndicator(
                       value: loadingProgress.expectedTotalBytes != null
@@ -70,18 +69,18 @@ class _ProductContainerState extends State<ProductContainer> {
           8.height(),
           Text(
             widget.product.name[0],
-            style: TextStyle(
+            textAlign: TextAlign.start,
+            style: const TextStyle(
               color: Colors.black,
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
-            textAlign: TextAlign.center,
           ),
           Text(
             '${widget.product.price} so\'m',
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,

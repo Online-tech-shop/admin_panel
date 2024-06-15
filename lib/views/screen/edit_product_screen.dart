@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uzum_market_admin_panel/models/product_model.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
@@ -112,7 +111,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                 builder: (BuildContext context) => AlertDialog(
                   title: Text(
                     'Siz haqiqatdan ham ${widget.product.name}ni ma\'lumotlar bazasidan o\'chirmoqchimisiz?',
-                    style: TextStyle(fontSize: 18.sp),
+                    style: const TextStyle(fontSize: 18),
                   ),
                   actions: [
                     TextButton(
@@ -215,9 +214,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                         },
                       ),
                       15.height(),
-                      SizedBox(
-                        height: 20.h,
-                        child: const Divider(),
+                      const SizedBox(
+                        height: 20,
+                        child: Divider(),
                       ),
 
                       /// text field for product images
@@ -227,18 +226,18 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsets.only(right: 20.0.w, left: 20.0.w),
+                                  const EdgeInsets.only(right: 20.0, left: 20.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('${i + 1}-rasm'),
                                   if (i == 0 && !canDeleteImage)
-                                    Text(
+                                    const Text(
                                       'Kamida 1 ta rasm bo\'lishi shart!',
                                       style: TextStyle(
                                         color: Colors.red,
-                                        fontSize: 12.sp,
+                                        fontSize: 12,
                                       ),
                                     ),
                                   Row(
@@ -274,9 +273,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                             ),
                           ],
                         ),
-                      SizedBox(
-                        height: 50.h,
-                        child: const Divider(),
+                      const SizedBox(
+                        height: 50,
+                        child: Divider(),
                       ),
 
                       /// text field for product category
@@ -328,9 +327,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                         },
                       ),
                       15.height(),
-                      SizedBox(
-                        height: 20.h,
-                        child: const Divider(),
+                      const SizedBox(
+                        height: 20,
+                        child: Divider(),
                       ),
 
                       /// text field for product description
@@ -340,18 +339,18 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsets.only(right: 20.0.w, left: 20.0.w),
+                                  const EdgeInsets.only(right: 20.0, left: 20.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('${i + 1}-tavsif'),
                                   if (i == 0 && !canDeleteDescription)
-                                    Text(
+                                    const Text(
                                       'Kamida 1 ta tavsif bo\'lishi shart!',
                                       style: TextStyle(
                                         color: Colors.red,
-                                        fontSize: 12.sp,
+                                        fontSize: 12,
                                       ),
                                     ),
                                   Row(
@@ -394,9 +393,9 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                             ),
                           ],
                         ),
-                      SizedBox(
-                        height: 50.h,
-                        child: const Divider(),
+                      const SizedBox(
+                        height: 50,
+                        child: Divider(),
                       ),
 
                       /// text field for product about
@@ -427,12 +426,12 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 30.h,
-                  child: const Divider(),
+                const SizedBox(
+                  height: 30,
+                  child: Divider(),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20.0, bottom: 5.h),
+                  padding: const EdgeInsets.only(left: 20.0, bottom: 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -441,7 +440,7 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.sp,
+                          fontSize: 20,
                         ),
                       ),
                       Text(
@@ -509,19 +508,19 @@ class _ManageProductScreenState extends State<ManageProductScreen> {
             },
             child: Container(
               width: double.infinity,
-              height: 50.h,
-              margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(10),
                 color: Theme.of(context).colorScheme.primary,
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Saqlash',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    fontSize: 20.sp,
+                    fontSize: 20,
                   ),
                 ),
               ),

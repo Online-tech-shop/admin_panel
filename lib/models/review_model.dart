@@ -1,5 +1,6 @@
 class Review {
   final String reviewId;
+  final String userId;
   final String productId;
   final String userName;
   final String text;
@@ -8,6 +9,7 @@ class Review {
 
   const Review({
     required this.reviewId,
+    required this.userId,
     required this.productId,
     required this.userName,
     required this.text,
@@ -18,6 +20,7 @@ class Review {
   factory Review.fromJson(Map<String, dynamic> json) {
     return Review(
       reviewId: json['review-id'] as String,
+      userId: json['user-id'] as String,
       productId: json['product-id'] as String,
       userName: json['user-name'] as String,
       text: json['text'] as String,

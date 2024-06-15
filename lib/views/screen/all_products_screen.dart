@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uzum_market_admin_panel/models/product_model.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 import 'package:uzum_market_admin_panel/viewmodel/product_view_model.dart';
@@ -28,12 +27,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text(
           'Mahsulot ma\'lumotlar bazasidan muvaffaqiyatli o\'chirildi!',
-          style: TextStyle(fontSize: 12.sp),
+          style: TextStyle(fontSize: 12),
         ),
-        duration: const Duration(seconds: 3),
+        duration: Duration(seconds: 3),
       ),
     );
   }
@@ -49,10 +48,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
         );
       },
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 20.0.w,
-          right: 20.0.w,
-          top: 20.h,
+        padding: const EdgeInsets.only(
+          left: 20.0,
+          right: 20.0,
+          top: 20,
         ),
         child: FutureBuilder(
           future: _productViewModel.fetchProducts(),
@@ -81,7 +80,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.5,
+                  childAspectRatio: 0.45,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),

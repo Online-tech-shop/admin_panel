@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 extension SizedBoxExtension on int {
-  Widget height() => SizedBox(height: h);
-  Widget width() => SizedBox(width: w);
+  Widget height() => SizedBox(height: this.toDouble());
+  Widget width() => SizedBox(width: this.toDouble());
 }

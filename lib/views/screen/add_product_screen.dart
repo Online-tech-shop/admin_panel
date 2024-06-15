@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uzum_market_admin_panel/service/http/user_http_service.dart';
 import 'package:uzum_market_admin_panel/utils/extension/sized_box_extension.dart';
 import 'package:uzum_market_admin_panel/viewmodel/product_view_model.dart';
 import 'package:uzum_market_admin_panel/views/widgets/custom_text_form_field.dart';
@@ -85,6 +85,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserHttpService().addUser();
     return Column(
       children: [
         Expanded(
@@ -138,9 +139,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       },
                     ),
                     15.height(),
-                    SizedBox(
-                      height: 20.h,
-                      child: const Divider(),
+                    const SizedBox(
+                      height: 20,
+                      child: Divider(),
                     ),
 
                     // Product images fields
@@ -150,17 +151,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         children: [
                           Padding(
                             padding:
-                                EdgeInsets.only(right: 20.0.w, left: 20.0.w),
+                                const EdgeInsets.only(right: 20.0, left: 20.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('${i + 1}-rasm'),
                                 if (i == 0 && !canDeleteImage)
-                                  Text(
+                                  const Text(
                                     'Kamida 1 ta rasm bo\'lishi shart!',
                                     style: TextStyle(
                                       color: Colors.red,
-                                      fontSize: 12.sp,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 Row(
@@ -196,9 +197,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           ),
                         ],
                       ),
-                    SizedBox(
-                      height: 50.h,
-                      child: const Divider(),
+                    const SizedBox(
+                      height: 50,
+                      child: Divider(),
                     ),
 
                     // Product category field
@@ -250,9 +251,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       },
                     ),
                     15.height(),
-                    SizedBox(
-                      height: 20.h,
-                      child: const Divider(),
+                    const SizedBox(
+                      height: 20,
+                      child: Divider(),
                     ),
 
                     // Product description fields
@@ -262,17 +263,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         children: [
                           Padding(
                             padding:
-                                EdgeInsets.only(right: 20.0.w, left: 20.0.w),
+                                const EdgeInsets.only(right: 20.0, left: 20.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('${i + 1}-tavsif'),
                                 if (i == 0 && !canDeleteDescription)
-                                  Text(
+                                  const Text(
                                     'Kamida 1 ta tavsif bo\'lishi shart!',
                                     style: TextStyle(
                                       color: Colors.red,
-                                      fontSize: 12.sp,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 Row(
@@ -313,9 +314,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           ),
                         ],
                       ),
-                    SizedBox(
-                      height: 50.h,
-                      child: const Divider(),
+                    const SizedBox(
+                      height: 50,
+                      child: Divider(),
                     ),
 
                     // Product about field
@@ -387,19 +388,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
           },
           child: Container(
             width: double.infinity,
-            height: 50.h,
-            margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+            height: 50,
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).colorScheme.primary,
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'Saqlash',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontSize: 20.sp,
+                  fontSize: 20,
                 ),
               ),
             ),
