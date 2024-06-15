@@ -40,7 +40,7 @@ class ReviewHttpService {
       _url,
       body: jsonEncode(
         {
-          'product-id': '-O-M2bq-qXzF7GcYGNs8',
+          'product-id': '-O-M24OYd90FlxMhFc4J',
           'user-name': 'gishmat',
           'text': 'text',
           'user-id':'-O-PjwcJc15azyxWXMWG',

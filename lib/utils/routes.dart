@@ -26,7 +26,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case RouteName.home:
       return CupertinoPageRoute(
-        builder: (BuildContext context) => const Login(),
+        builder: (BuildContext context) => const HomeScreen(),
       );
     case RouteName.superAdmin:
       return CupertinoPageRoute(
@@ -34,7 +34,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     default:
       return CupertinoPageRoute(
-        builder: (BuildContext context) => const HomeScreen(),
+        builder: (BuildContext context) => const Login(),
       );
   }
 }
