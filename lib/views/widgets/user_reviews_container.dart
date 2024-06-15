@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uzum_market_admin_panel/models/review_model.dart';
 
-class UserReviewsContainer extends StatefulWidget {
+class UserReviewsContainer extends StatelessWidget {
   final Review review;
   final int index;
   final Function(String) onReviewDeleted;
@@ -14,17 +14,10 @@ class UserReviewsContainer extends StatefulWidget {
   });
 
   @override
-  State<UserReviewsContainer> createState() => _UserReviewsContainerState();
-}
-
-class _UserReviewsContainerState extends State<UserReviewsContainer> {
-
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: widget.index == 0 ? 10 : 0,
+        left: index == 0 ? 10 : 0,
         right: 10,
         bottom: 5,
       ),
@@ -41,7 +34,7 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.review.userName,
+                  review.userName,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 IconButton(
@@ -54,7 +47,7 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         title: Text(
-                          'Siz haqiqatdan ham ${widget.review.userName} tomonidan qoldirilgan sharhni ma\'lumotlar bazasidan o\'chirmoqchimisiz?',
+                          'Siz haqiqatdan ham ${review.userName} tomonidan qoldirilgan sharhni ma\'lumotlar bazasidan o\'chirmoqchimisiz?',
                           style: const TextStyle(fontSize: 18),
                         ),
                         actions: [
@@ -74,7 +67,7 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
-                              widget.onReviewDeleted(widget.review.reviewId);
+                              onReviewDeleted(review.reviewId);
                             },
                             style: const ButtonStyle(
                               backgroundColor:
@@ -94,7 +87,7 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
             ),
             const SizedBox(height: 5),
             Text(
-              widget.review.text,
+              review.text,
               style: Theme.of(context).textTheme.bodyLarge,
               maxLines: null,
               overflow: TextOverflow.visible,
@@ -105,7 +98,7 @@ class _UserReviewsContainerState extends State<UserReviewsContainer> {
                 5,
                 (starIndex) => Icon(
                   Icons.star,
-                  color: starIndex < widget.review.star
+                  color: starIndex < review.star
                       ? Colors.yellow
                       : Colors.grey,
                 ),

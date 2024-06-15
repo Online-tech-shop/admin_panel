@@ -32,7 +32,7 @@ class UserHttpService {
   }
 
   Future<void> addUser() async {
-    final response = await http.post(
+    await http.post(
       _url,
       body: jsonEncode(
         {
@@ -44,6 +44,12 @@ class UserHttpService {
         },
       ),
     );
-    print(response.body);
+  }
+
+  Future<void> deleteReview(String id) async {
+    final Uri url = Uri.parse(
+      'https://to-do-f5021-default-rtdb.firebaseio.com/users/$id.json',
+    );
+    await http.delete(url);
   }
 }

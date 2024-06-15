@@ -11,4 +11,13 @@ class UserViewModel {
       rethrow;
     }
   }
+
+  Future<void> deleteUser(String id) async{
+    try{
+      await _userHttpService.deleteReview(id);
+    }catch(e){
+      rethrow;
+    }
+  }
+
 }
