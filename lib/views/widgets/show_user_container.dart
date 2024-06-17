@@ -167,7 +167,7 @@ class _ShowUserContainerState extends State<ShowUserContainer> {
             )
           else
             const Expanded(
-              child: Center(child: Text('Sharh qoldirilmagan')),
+              child: Center(child: Text('Foydalanuvchi sharh qoldirmagan')),
             ),
         ],
       ),

@@ -31,20 +31,20 @@ class UserHttpService {
     }
   }
 
-  Future<void> addUser() async {
-    await http.post(
-      _url,
-      body: jsonEncode(
-        {
-          'name': 'gishmat',
-          'sur-name': 'toshmat',
-          'gender': 0,
-          'born-data': 'yesterday',
-          'email': 'email',
-        },
-      ),
-    );
-  }
+  // Future<void> addUser() async {
+  //   await http.post(
+  //     _url,
+  //     body: jsonEncode(
+  //       {
+  //         'name': 'Gishmatali',
+  //         'sur-name': 'userjon',
+  //         'gender': 1,
+  //         'born-data': 'yesterday',
+  //         'email': 'email',
+  //       },
+  //     ),
+  //   );
+  // }
 
   Future<void> deleteReview(String id) async {
     final Uri url = Uri.parse(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:uzum_market_admin_panel/service/http/review_http_service.dart';
 import 'package:uzum_market_admin_panel/views/screen/add_product_screen.dart';
 import 'package:uzum_market_admin_panel/views/screen/all_products_screen.dart';
 import 'package:uzum_market_admin_panel/views/screen/manage_user_screen.dart';
@@ -13,20 +12,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Widget> _pages =  [
+  final List<Widget> _pages = [
     const ProductsScreen(),
     const AddProductScreen(),
     const ManageUserScreen(),
   ];
 
   int _currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    ReviewHttpService().addReview();
-    // UserHttpService().addUser();
-  }
 
   @override
   Widget build(BuildContext context) {

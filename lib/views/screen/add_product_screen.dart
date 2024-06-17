@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:uzum_market_admin_panel/service/http/user_http_service.dart';
 import 'package:uzum_market_admin_panel/utils/extension/sized_box_extension.dart';
 import 'package:uzum_market_admin_panel/viewmodel/product_view_model.dart';
 import 'package:uzum_market_admin_panel/views/widgets/custom_text_form_field.dart';
@@ -85,7 +84,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserHttpService().addUser();
     return Column(
       children: [
         Expanded(
