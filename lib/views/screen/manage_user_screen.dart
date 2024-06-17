@@ -45,19 +45,23 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
   @override
   Widget build(BuildContext context) {
     return isDataCame
-        ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ListView.builder(
-              itemCount: _usersList.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  ShowUserContainer(
-                index: index,
-                user: _usersList[index],
-                userReviews: _usersList[index].getUserReviews(_reviewsList),
-                onUserDeleted: onUserDeleted,
-              ),
-            ),
-          )
+        ? _usersList.isEmpty
+            ? const Center(
+                child: Text('Foydalanuvchilar topilmadi'),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ListView.builder(
+                  itemCount: _usersList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      ShowUserContainer(
+                    index: index,
+                    user: _usersList[index],
+                    userReviews: _usersList[index].getUserReviews(_reviewsList),
+                    onUserDeleted: onUserDeleted,
+                  ),
+                ),
+              )
         : const Center(child: CircularProgressIndicator());
   }
 }

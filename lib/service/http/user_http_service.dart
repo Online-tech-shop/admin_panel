@@ -31,21 +31,6 @@ class UserHttpService {
     }
   }
 
-  // Future<void> addUser() async {
-  //   await http.post(
-  //     _url,
-  //     body: jsonEncode(
-  //       {
-  //         'name': 'Gishmatali',
-  //         'sur-name': 'userjon',
-  //         'gender': 1,
-  //         'born-data': 'yesterday',
-  //         'email': 'email',
-  //       },
-  //     ),
-  //   );
-  // }
-
   Future<void> deleteReview(String id) async {
     final Uri url = Uri.parse(
       'https://to-do-f5021-default-rtdb.firebaseio.com/users/$id.json',

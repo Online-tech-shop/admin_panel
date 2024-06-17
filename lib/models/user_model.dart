@@ -7,6 +7,7 @@ class User {
   final int gender;
   final String bornData;
   final String email;
+  final String localId;
 
   const User({
     required this.id,
@@ -15,6 +16,7 @@ class User {
     required this.gender,
     required this.bornData,
     required this.email,
+    required this.localId,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class User {
       gender: json['gender'] as int,
       bornData: json['born-data'] as String,
       email: json['email'] as String,
+      localId: json['local-id'] as String,
     );
   }
 
