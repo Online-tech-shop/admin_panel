@@ -35,22 +35,6 @@ class ReviewHttpService {
     }
   }
 
-  // Future<void> addReview() async {
-  //   await http.post(
-  //     _url,
-  //     body: jsonEncode(
-  //       {
-  //         'product-id': '-O-M24OYd90FlxMhFc4J',
-  //         'user-name': 'gishmatali',
-  //         'text': 'text',
-  //         'user-id':'-O-ZHurCF-Fw7CDyrO2B',
-  //         'star': 5,
-  //         'published-date-time': 'yesterday',
-  //       },
-  //     ),
-  //   );
-  // }
-
   Future<void> deleteReview({required String id}) async {
     try {
       await http.delete(
