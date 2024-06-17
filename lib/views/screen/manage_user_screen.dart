@@ -34,9 +34,12 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
   void onUserDeleted(String p0) async {
     _userViewModel.deleteUser(p0);
     _usersList.removeAt(_usersList.indexWhere((element) => element.id == p0));
-    setState(() {
-
-    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Foydalanuvchi muvaffaqiyatli o\'chirildi!'),
+      ),
+    );
+    setState(() {});
   }
 
   @override

@@ -155,6 +155,11 @@ class _ShowUserContainerState extends State<ShowUserContainer> {
                     int? a = widget.userReviews
                         .indexWhere((element) => element.reviewId == p0);
                     widget.userReviews.removeAt(a);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Sharh muvaffaqiyatli o\'chirildi!'),
+                      ),
+                    );
                     setState(() {});
                   },
                 ),
